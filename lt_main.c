@@ -10,7 +10,9 @@ int main(int argc, char **argv)
   lt_args(argc, argv, &opts);
 
   struct lt_query lq;
-  lt_init(&lq, opts.type);
+  
+  lq.lt_type = opts.type;
+  lt_init(&lq);
 
   while (opts.iter--) 
     lt_drvr(&lq);  
