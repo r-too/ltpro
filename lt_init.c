@@ -5,10 +5,9 @@
 
 extern char *custom_opts;
 
-void lt_init(struct lt_query *q, unsigned char lt_type)
+void lt_init(struct lt_query *q)
 {
 
-  q->lt_type = 0x0;
 
   q->wn_min = 0;
   q->wn_max = 0;
@@ -22,7 +21,7 @@ void lt_init(struct lt_query *q, unsigned char lt_type)
 
   memset(q->query_str, '\0', sizeof(q->query_str));
 
-  switch (lt_type) {
+  switch (q->lt_type) {
   case MEGA_MILLIONS:
     lt_megamillions_init(q);
     break;
