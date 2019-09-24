@@ -8,17 +8,6 @@ extern char *custom_opts;
 void lt_init(struct lt_query *q)
 {
 
-
-  q->wn_min = 0;
-  q->wn_max = 0;
-  q->t_wnum = 0;
-  q->wn_rep = 0;
-
-  q->rn_min = 0;
-  q->rn_max = 0;
-  q->t_rnum = 0;
-  q->rn_rep = 0;
-
   memset(q->query_str, '\0', sizeof(q->query_str));
 
   switch (q->lt_type) {
