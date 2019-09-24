@@ -9,7 +9,7 @@ int main(int argc, char **argv)
   struct lt_opts opts = { 0 };
   lt_args(argc, argv, &opts);
 
-  struct lt_query lq;
+  struct lt_query lq = { 0 };
   
   lq.lt_type = opts.type;
   lt_init(&lq);
