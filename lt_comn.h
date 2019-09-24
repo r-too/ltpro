@@ -103,7 +103,7 @@ void lt_srand_init();
 void lt_generator_loop(uchar num, uchar min, uchar max, uchar rep, uchar *LIST);
 
 /* lt_init.c */
-void lt_init(struct lt_query *q, uchar lt_type);
+void lt_init(struct lt_query *q);
 void lt_megamillions_init(struct lt_query *q);
 void lt_powerball_init(struct lt_query *q);
 void lt_superlotto_init(struct lt_query *q);
