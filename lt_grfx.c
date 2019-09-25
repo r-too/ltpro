@@ -1,51 +1,28 @@
 #include <gd.h>
 #include <stdio.h>
+#include "lt_comn.h"
 
+#define rcolor (rand() % 255)
 
-int gd_main() {
-  /* Declare the image */
+int gdmain() {
+  
   gdImagePtr im;
-  /* Declare output files */
-  FILE *pngout, *jpegout;
-  /* Declare color indexes */
-  int black;
-  int white;
-
-  /* Allocate the image: 64 pixels across by 64 pixels tall */
-  im = gdImageCreate(64, 64);
-
-  /* Allocate the color black (red, green and blue all minimum).
-    Since this is the first color in a new image, it will
-    be the background color. */
+  FILE *pngout;
+  int black, white;
+  
+  lt_srand_init();
+  im = gdImageCreate(512, 512);
   black = gdImageColorAllocate(im, 0, 0, 0);
+  white = gdImageColorAllocate(im, 0xff, 0xff, 0xff);
 
-  /* Allocate the color white (red, green and blue all maximum). */
-  white = gdImageColorAllocate(im, 255, 255, 255);
+  for (int x = 0; x < 512; x += 32) 
+    for (int y = 0; y < 512; y += 32) {
+      gdImageFilledRectangle(im, x, y, x+32, y+32, ((int)(rand() %2))?black:white);
+    }
 
-  /* Draw a line from the upper left to the lower right,
-    using white color index. */
-  gdImageLine(im, 0, 0, 63, 63, white);
-  gdImageLine(im, 0, 0, 63, 63, black);
-
-  /* Open a file for writing. "wb" means "write binary", important
-    under MSDOS, harmless under Unix. */
   pngout = fopen("test.png", "wb");
-
-  /* Do the same for a JPEG-format file. */
-  jpegout = fopen("test.jpg", "wb");
-
-  /* Output the image to the disk file in PNG format. */
   gdImagePng(im, pngout);
-
-  /* Output the same image in JPEG format, using the default
-    JPEG quality setting. */
-  gdImageJpeg(im, jpegout, -1);
-
-  /* Close the files. */
   fclose(pngout);
-  fclose(jpegout);
-
-  /* Destroy the image in memory. */
   gdImageDestroy(im);
 
   return 0;
